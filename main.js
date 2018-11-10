@@ -47,7 +47,7 @@ audioElement.addEventListener('play', () => {
 
 		else if (visOption.value == 'bar') {
 			analyser.getByteFrequencyData(dataArray);
-			let barWidth = (cWidth / bufferLength);
+			let barWidth = (cWidth / bufferLength) * 1.5;
 			let barHeight;
 			let x = 0;
 
@@ -55,6 +55,10 @@ audioElement.addEventListener('play', () => {
 				barHeight = (dataArray[i] / 100) * (cHeight * 0.75);
 				canvasCtx.fillStyle = `rgb(${barHeight / 2.5}, 100, ${barHeight+50})`;
 				canvasCtx.fillRect(x, cHeight - barHeight / 2, barWidth, barHeight);
+				canvasCtx.shadowOffsetX = 4;
+				canvasCtx.shadowOffsetY = 4;
+				canvasCtx.shadowBlur = 4;
+				canvasCtx.shadowColor = 'rgba(0, 0, 0, 0.3)';
 
 				x += barWidth + 1;
 			}
