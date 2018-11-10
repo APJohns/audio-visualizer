@@ -13,7 +13,7 @@ audioElement.addEventListener('play', () => {
 	track.connect(analyser);
 	analyser.connect(audioCtx.destination);
 	if (visOption.value == 'wave') analyser.fftSize = 4096;
-	else if (visOption.value == 'bar') analyser.fftSize = 256;
+	else if (visOption.value == 'bar') analyser.fftSize = 1024;
 	let bufferLength = analyser.frequencyBinCount;
 	let dataArray = new Uint8Array(bufferLength);
 	
@@ -27,7 +27,7 @@ audioElement.addEventListener('play', () => {
 		if (visOption.value == 'wave') {
 			analyser.getByteTimeDomainData(dataArray);
 			canvasCtx.lineWidth = 2;
-			canvasCtx.strokeStyle = '#eee';
+			canvasCtx.strokeStyle = '#227';
 			canvasCtx.beginPath();
 			let sliceWidth = cWidth * 1.0 / bufferLength;
 			let x = 0;
@@ -47,7 +47,7 @@ audioElement.addEventListener('play', () => {
 
 		else if (visOption.value == 'bar') {
 			analyser.getByteFrequencyData(dataArray);
-			let barWidth = (cWidth / bufferLength) * 1.5;
+			let barWidth = (cWidth / bufferLength) * 4;
 			let barHeight;
 			let x = 0;
 
@@ -55,10 +55,6 @@ audioElement.addEventListener('play', () => {
 				barHeight = (dataArray[i] / 100) * (cHeight * 0.75);
 				canvasCtx.fillStyle = `rgb(${barHeight / 2.5}, 100, ${barHeight+50})`;
 				canvasCtx.fillRect(x, cHeight - barHeight / 2, barWidth, barHeight);
-				canvasCtx.shadowOffsetX = 4;
-				canvasCtx.shadowOffsetY = 4;
-				canvasCtx.shadowBlur = 4;
-				canvasCtx.shadowColor = 'rgba(0, 0, 0, 0.3)';
 
 				x += barWidth + 1;
 			}

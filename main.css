@@ -1,5 +1,5 @@
 body {
-	background-color: lightslategrey;
+	background-color: rgb(112, 171, 230);
 	font-family: sans-serif;
 	text-align: center;
 }
@@ -8,10 +8,14 @@ main {
 	padding: 50px;
 	display: flex;
 	flex-direction: column;
-	height: 100vh;
+	height: 100%;
 	width: 80%;
 	max-width: 800px;
 	margin: auto;
+}
+
+canvas {
+	background-color: #eee;
 }
 
 audio {
